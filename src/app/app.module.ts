@@ -11,7 +11,8 @@ import { from } from 'rxjs';
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    
   ],
   imports: [
     BrowserModule,
