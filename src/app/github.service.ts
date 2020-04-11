@@ -18,7 +18,7 @@ export class GithubService {
 
    getUsername ( username : string) {
      console.log ("service is ready")
-     this.username = '';
+     this.username = 'brenda-wanjiku';
    }
 
    getProfileInfo () {

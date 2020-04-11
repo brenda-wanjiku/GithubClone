@@ -20,15 +20,15 @@ public users: User
 
   ngOnInit() {
   }
+
   getUser(){
     this.githubService.getUsername(this.username);
     this.githubService.getProfileInfo();
-    this.user = this.githubService.user;
+    this.users = this.githubService.user;
     console.log(this.user)
-
   }
-  
 
   
 
+  
 }
