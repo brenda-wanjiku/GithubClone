@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'GithubClone';
+  public greeting = "hi"
+  searchUser(greeting){
+    console.log(greeting)
+  }
 }

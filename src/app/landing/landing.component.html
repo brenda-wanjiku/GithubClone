@@ -1,1 +1,13 @@
-<p>landing works!</p>
+<div>
+<form  #searchForm='ngForm' >
+        <label for="username"></label>
+        <input type="text" id="username" name="username" [(ngModel)] = "users" #username = 'ngModel'>
+        <button type="submit" (click)= getUser()>Search</button>
+</form>
+</div>
+    <div>
+        <p >{{user.login}}</p>
+        <p >{{user.followers}}</p>
+        <p >{{user.following}}</p>
+        <p >{{user.public_repos}}</p>
+    </div>

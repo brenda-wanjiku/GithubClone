@@ -1,15 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { GithubService } from '../github.service'
+import { User } from '../user';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.css']
+  styleUrls: ['./landing.component.css'],
+  providers: [GithubService]
 })
 export class LandingComponent implements OnInit {
+@Input() user: User;
+public username: string;
+public users: User
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private githubService: GithubService,  private http: HttpClient) { 
+    this.githubService.getProfileInfo()
   }
+
+  ngOnInit() {
+  }
+  getUser(){
+    this.githubService.getUsername(this.username);
+    this.githubService.getProfileInfo();
+    this.user = this.githubService.user;
+    console.log(this.user)
+
+  }
+  
+
+  
 
 }
