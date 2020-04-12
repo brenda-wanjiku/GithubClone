@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { User } from './user'
 import { Repository } from './repository'
-import { resolve } from 'dns';
-import { rejects } from 'assert';
 
 @Injectable({
   providedIn: 'root'
@@ -75,23 +73,6 @@ export class GithubService {
   return promise;
    }
 
-Github(){
-let promise = new Promise ((resolve,reject) =>{
-this.http
-.get(`https://api.github.com/users/brenda-wanjiku?access_token=`+environment.apiKey)
-.toPromise()
-.then( response => {
-      this.data = response
-      console.log(this.data);
-      resolve()
-};
-      error=> {
-        this.data = "Unavailable";
-        reject(error);
-    });
-  });
-  return promise;
-}
 
 }
 

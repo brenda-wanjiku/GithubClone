@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GithubService } from '../github.service'
 import { User } from '../user';
-import { Repository } from '../repository'
+import { Repository } from '../repository';
+import { UserProfileService } from '../user-profile.service'
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -14,10 +15,16 @@ export class LandingComponent implements OnInit {
 @Input() 
 user: User;
 repository: Repository
+profile : User
 public username: string;
 
 
-  constructor(private githubService: GithubService, private http: HttpClient) { 
+  constructor(private githubService: GithubService, private http: HttpClient, private userProfileService : UserProfileService) { 
+    this.userProfileService.userProfile()
+    this.profile = this.userProfileService.profile
+    this.userProfileService.userRepo()
+    this.repository = this.userProfileService.repository
+    
   }
 
   ngOnInit() {

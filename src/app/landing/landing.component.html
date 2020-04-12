@@ -1,3 +1,4 @@
+<div>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item active" aria-current="page">Home</li>
@@ -6,8 +7,7 @@
   <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
 <form   #searchForm='ngForm' >
         <label for="username"></label>
-        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>
-      
+        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>   
 </form>
 
 <button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getUser()>Search</button>
@@ -24,3 +24,22 @@
         </div>
     </div>
 </div>
+</div>
+<hr>
+<hr>
+<hr>
+
+<div class="card">
+    <div>
+    <img src="" class="card-img-top" alt="">
+    <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text">Username {{profile.login}}</p>
+      <p class="card-text">Username {{profile.followers}}</p>
+      <p class="card-text">Username {{repository.name}}</p>
+    </div>
+  </div>
+</div>
+
+
+
