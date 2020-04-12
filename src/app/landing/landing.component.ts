@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GithubService } from '../github.service'
 import { User } from '../user';
+import { Repository } from './repository'
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -12,10 +13,9 @@ import { HttpClient } from '@angular/common/http';
 export class LandingComponent implements OnInit {
 @Input() user: User;
 public username: string;
-public users: User
 
-  constructor(private githubService: GithubService,  private http: HttpClient) { 
-    this.githubService.getProfileInfo()
+
+  constructor(private githubService: GithubService, private http: HttpClient) { 
   }
 
   ngOnInit() {
@@ -24,11 +24,9 @@ public users: User
   getUser(){
     this.githubService.getUsername(this.username);
     this.githubService.getProfileInfo();
-    this.users = this.githubService.user;
+    this.user = this.githubService.user;
     console.log(this.user)
   }
-
-  
 
   
 }

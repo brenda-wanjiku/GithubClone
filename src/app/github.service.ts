@@ -3,22 +3,28 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
   import { from } from 'rxjs';
   import { User } from './user'
+  import { Repository } from './repository'
+import { resolve } from 'dns';
+import { rejects } from 'assert';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GithubService {
   public user: User;
+  public repository : Repository
   public username : string;
-  apiUrl: 'http://api.github.com/users?access_token='
+  public repoName : string
+
 
   constructor(private http : HttpClient) {
-    this.user = new User ('','', 0, 0,0,0,'')
+    this.user = new User ('','', 0, 0,0,0,'','')
+    this.repository = new Repository('','')
    }
 
-   getUsername ( username : string) {
+   getUsername (username : string ) {
      console.log ("service is ready")
-     this.username = 'brenda-wanjiku';
+     this.username = username;
    }
 
    getProfileInfo () {
@@ -30,9 +36,9 @@ export class GithubService {
     public_repos: number,
     projects: number,
     avatar_url : string,
+    repos_url :string,
    
   }
-
 
    const promise = new Promise((resolve, reject) => {
     this.http
@@ -47,26 +53,56 @@ export class GithubService {
           this.user.public_repos= response.public_repos;
           this.user.projects = response.projects;
           this.user.avatar_url = response.avatar_url;
+          this.user.repos_url = response.repos_url
           console.log(`https://api.github.com/users/brenda-wanjiku?access_token=`+environment.apiKey);
           console.log(this.user);
 
           resolve();
         },
         error => {
-          this.user.login= "Unavailable"
-          this.user.bio = "Unavailable"
-          this.user.followers = 0
-          this.user.following = 0
-          this.user.public_repos= 0 
-          this.user.projects = 0
-          this.user.avatar_url = "Unavailable" 
+          this.user.login= "Unavailable";
+          this.user.bio = "Unavailable";
+          this.user.followers = 0;
+          this.user.following = 0;
+          this.user.public_repos= 0 ;
+          this.user.projects = 0;
+          this.user.avatar_url = "Unavailable";
+          this.user.repos_url = "Unavailable";
           reject(error);
-        }
-      );
+        });
   });
   return promise;
 }
 
 
-   
+getRepo(){
+  interface repoResponse{
+  name: string,
+  description: string,
+  }
+
+const promise = new Promise ((resolve,reject) => {
+  this.http
+  .get<repoResponse>(`http://api.github.com/users${this.username}?accesstoken=`+environment.apiKey+`/repos`)
+  .toPromise()
+  .then(repo=>{
+    this.repository.name = repo.name
+    this.repository.description = repo.description
+    console.log(`http://api.github.com/users/brenda-wanjiku?accesstoken=`+environment.apiKey+`/repos`)
+    console.log(this.repository)
+    resolve()
+  },
+    error=>{
+      this.repository.name = "Unavailable";
+      this.repository.description = "Unavailable";
+      reject(error)
+    });
+});
+return promise;
 }
+
+
+}
+
+
+  

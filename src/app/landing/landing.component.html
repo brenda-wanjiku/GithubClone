@@ -1,13 +1,19 @@
-<div>
-<form  #searchForm='ngForm' >
+<form   #searchForm='ngForm' >
         <label for="username"></label>
-        <input type="text" id="username" name="username" [(ngModel)] = "users" #username = 'ngModel'>
-        <button type="submit" (click)= getUser()>Search</button>
+        <input type="text" id='username' name='username' [(ngModel)]='username'>
+      
 </form>
-</div>
-    <div *ngIf = 'users'>
-        <p >{{user.login}}</p>
-        <p >{{user.followers}}</p>
-        <p >{{user.following}}</p>
-        <p >{{user.public_repos}}</p>
+
+<button type="submit" (click)= getUser()>Search</button>
+<div class ="panel-body">
+<div *ngIf = 'user'>
+    <div class="row">
+     <img src="{{user.avatar_url}}" class="img-circle" img="responsive" alt="profileImg">
     </div>
+        <p> name {{user.login}}</p> 
+            <p>followers {{user.followers}}</p> 
+                <p>following {{user.following}}</p> 
+                    <p>public repos {{user.public_repos}}</p> 
+                    <button>{{user.repos_url}}</button>
+    </div>
+</div>

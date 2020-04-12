@@ -7,6 +7,7 @@ constructor(
  public public_repos: number,
  public projects: number,
  public avatar_url : string,
+ public repos_url :string
 
 
 ){}
