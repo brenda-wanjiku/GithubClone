@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-  import { from } from 'rxjs';
-  import { User } from './user'
-  import { Repository } from './repository'
+import { User } from './user'
+import { Repository } from './repository'
 import { resolve } from 'dns';
 import { rejects } from 'assert';
 
@@ -15,6 +14,8 @@ export class GithubService {
   public repository : Repository
   public username : string;
   public repoName : string
+  public name : string
+  public data: any
 
 
   constructor(private http : HttpClient) {
@@ -72,37 +73,26 @@ export class GithubService {
         });
   });
   return promise;
-}
+   }
 
-
-getRepo(){
-  interface repoResponse{
-  name: string,
-  description: string,
-  }
-
-const promise = new Promise ((resolve,reject) => {
-  this.http
-  .get<repoResponse>(`http://api.github.com/users${this.username}?accesstoken=`+environment.apiKey+`/repos`)
-  .toPromise()
-  .then(repo=>{
-    this.repository.name = repo.name
-    this.repository.description = repo.description
-    console.log(`http://api.github.com/users/brenda-wanjiku?accesstoken=`+environment.apiKey+`/repos`)
-    console.log(this.repository)
-    resolve()
-  },
-    error=>{
-      this.repository.name = "Unavailable";
-      this.repository.description = "Unavailable";
-      reject(error)
+Github(){
+let promise = new Promise ((resolve,reject) =>{
+this.http
+.get(`https://api.github.com/users/brenda-wanjiku?access_token=`+environment.apiKey)
+.toPromise()
+.then( response => {
+      this.data = response
+      console.log(this.data);
+      resolve()
+};
+      error=> {
+        this.data = "Unavailable";
+        reject(error);
     });
-});
-return promise;
+  });
+  return promise;
 }
 
-
 }
-
 
   

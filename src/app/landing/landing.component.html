@@ -1,19 +1,26 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+  </nav>
+  <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
 <form   #searchForm='ngForm' >
         <label for="username"></label>
-        <input type="text" id='username' name='username' [(ngModel)]='username'>
+        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>
       
 </form>
 
-<button type="submit" (click)= getUser()>Search</button>
-<div class ="panel-body">
+<button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getUser()>Search</button>
 <div *ngIf = 'user'>
+    <h1>Brenda Wanjiku <span class="badge badge-secondary">Coder</span></h1>
     <div class="row">
      <img src="{{user.avatar_url}}" class="img-circle" img="responsive" alt="profileImg">
-    </div>
+     <div class ="panel-body">
         <p> name {{user.login}}</p> 
             <p>followers {{user.followers}}</p> 
                 <p>following {{user.following}}</p> 
                     <p>public repos {{user.public_repos}}</p> 
                     <button>{{user.repos_url}}</button>
+        </div>
     </div>
 </div>
