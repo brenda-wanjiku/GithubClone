@@ -1,45 +1,52 @@
-<div>
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">Home</li>
-    </ol>
-  </nav>
-  <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Primary link</a>
+<h1><span class="badge badge-primary">Github Searcher</span> </h1>
 <form   #searchForm='ngForm' >
         <label for="username"></label>
-        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>   
+        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>  
+        <label for="repositories"></label>
+        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>  
 </form>
 
 <button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getUser()>Search</button>
+
+
+
+
 <div *ngIf = 'user'>
-    <h1>Brenda Wanjiku <span class="badge badge-secondary">Coder</span></h1>
     <div class="row">
+        <div class= "col-md-4">
      <img src="{{user.avatar_url}}" class="img-circle" img="responsive" alt="profileImg">
-     <div class ="panel-body">
-        <p> name {{user.login}}</p> 
-            <p>followers {{user.followers}}</p> 
-                <p>following {{user.following}}</p> 
-                    <p>public repos {{user.public_repos}}</p> 
-                    <button>{{user.repos_url}}</button>
+    </div>
+     <div class ="col-md-6">
+        <h4> name:  {{user.login}}</h4> 
+            <h4>followers:  {{user.followers}}</h4> 
+                <h4>following:  {{user.following}}</h4> 
+                    <h4>public repos:  {{user.public_repos}}</h4> 
+                  <button> <a href="{{user.repos_url}}"> Go to Github</a></button> 
         </div>
     </div>
 </div>
-</div>
-<hr>
-<hr>
-<hr>
+
 
 <div class="card">
     <div>
     <img src="" class="card-img-top" alt="">
     <div class="card-body">
-      <h5 class="card-title"></h5>
-      <p class="card-text">Username {{profile.login}}</p>
-      <p class="card-text">Username {{profile.followers}}</p>
-      <p class="card-text">Username {{repository.name}}</p>
+      <div class="row">
+        <div class="col-md-4">
+      <img src="{{profile.avatar_url}}" class="img-circle" img="responsive" alt="profileImg" width="400px" height="400px">
+    </div>
+    <div class="col-md-6">
+      <h3 class="card-title"> {{profile.login}} </h3>
+      <h3 class="card-text"> followers: {{profile.followers}}  </h3>
+      <h3 class="card-text">following: {{profile.following}} </h3>
+      <h3 class="card-text">public Repositories:{{profile.public_repos}}</h3>
+     
     </div>
   </div>
 </div>
+</div>
 
-
-
+<div> 
+    <h2> Repositories</h2>
+    <p *ngFor ='let repo of repos'>Following: {{profile.following}}</p>
+</div>

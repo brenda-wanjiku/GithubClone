@@ -14,17 +14,22 @@ import { HttpClient } from '@angular/common/http';
 export class LandingComponent implements OnInit {
 @Input() 
 user: User;
-repository: Repository
 profile : User
+repo: Repository
+repos : Repository[]
+searchRepo : Repository
+searchRepos : Repository []
 public username: string;
 
 
-  constructor(private githubService: GithubService, private http: HttpClient, private userProfileService : UserProfileService) { 
+  constructor( private http: HttpClient, private githubService: GithubService, private userProfileService : UserProfileService) { 
     this.userProfileService.userProfile()
     this.profile = this.userProfileService.profile
     this.userProfileService.userRepo()
-    this.repository = this.userProfileService.repository
-    
+    this.repos = this.userProfileService.repos
+    this.githubService.githubRepo()
+    this.repos = this.githubService.searchRepos
+
   }
 
   ngOnInit() {

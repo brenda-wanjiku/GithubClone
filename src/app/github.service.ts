@@ -9,23 +9,24 @@ import { Repository } from './repository'
 })
 export class GithubService {
   public user: User;
-  public repository : Repository
+  public searchRepo : Repository;
   public username : string;
-  public repoName : string
-  public name : string
-  public data: any
+  public name : string;
+  public searchRepos : Repository [] = []
+
 
 
   constructor(private http : HttpClient) {
     this.user = new User ('','', 0, 0,0,0,'','')
-    this.repository = new Repository('','')
+    this.searchRepo = new Repository('','')
    }
+
+
 
    getUsername (username : string ) {
      console.log ("service is ready")
      this.username = username;
    }
-
    getProfileInfo () {
     interface userResponse {
     login: string,
@@ -35,14 +36,11 @@ export class GithubService {
     public_repos: number,
     projects: number,
     avatar_url : string,
-    repos_url :string,
-   
+    repos_url :string, 
   }
-
-   const promise = new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
     this.http
-      .get <userResponse> (
-        `https://api.github.com/users/${this.username}?access_token=`+environment.apiKey)
+      .get <userResponse>(`https://api.github.com/users/${this.username}?access_token=`+environment.apiKey)
       .toPromise()
       .then(response => {
           this.user.login= response.login;
@@ -53,8 +51,8 @@ export class GithubService {
           this.user.projects = response.projects;
           this.user.avatar_url = response.avatar_url;
           this.user.repos_url = response.repos_url
-          console.log(`https://api.github.com/users/brenda-wanjiku?access_token=`+environment.apiKey);
           console.log(this.user);
+          console.log (`https://api.github.com/users/${this.username}/repos?access_token=`+environment.apiKey)
 
           resolve();
         },
@@ -72,6 +70,38 @@ export class GithubService {
   });
   return promise;
    }
+
+
+   githubRepo(){
+    interface repoResponse {
+      name: string,
+      description: string,  
+    }
+    let promise = new Promise((resolve, reject) => {
+    this.http
+      .get <repoResponse>(`https://api.github.com/users/${this.username}/repos?access_token=`+environment.apiKey)
+      .toPromise()
+      .then(response => {
+      
+        for (let i = 0; i < 10; i++) {
+          console.log(response[i])
+          this.searchRepo = new Repository (response[i].name, response[i].description)
+          this.searchRepos.push(this.searchRepo)     
+        }
+        console.log(response)
+        console.log(this.searchRepos)
+      
+          resolve();
+        },
+        error => {
+          this.searchRepo.name= "Unavailable";
+          this.searchRepo.description = "Unavailable";
+          reject(error)
+        });
+  });
+  return promise;
+   }
+
 
 
 }
