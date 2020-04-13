@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { from } from 'rxjs';
 import { DatePipe } from './date.pipe';
+import { GithubDirective } from './github.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     DatePipe,
+    GithubDirective,
     
   ],
   imports: [
