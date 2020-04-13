@@ -7,11 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { from } from 'rxjs';
+import { DatePipe } from './date.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
+    DatePipe,
     
   ],
   imports: [

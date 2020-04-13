@@ -16,9 +16,9 @@ export class LandingComponent implements OnInit {
 user: User;
 profile : User
 repo: Repository
-repos : Repository[]
+repos : Repository[] = []
 searchRepo : Repository
-searchRepos : Repository []
+searchRepos : Repository[] = []
 public username: string;
 
 
@@ -28,11 +28,14 @@ public username: string;
     this.userProfileService.userRepo()
     this.repos = this.userProfileService.repos
     this.githubService.githubRepo()
-    this.repos = this.githubService.searchRepos
-
+    this.searchRepos = this.githubService.searchRepos
   }
 
   ngOnInit() {
+  }
+
+  getRepo(){
+    this.githubService.githubRepo()
   }
 
   getUser(){

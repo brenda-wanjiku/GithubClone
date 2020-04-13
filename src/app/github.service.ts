@@ -13,6 +13,7 @@ export class GithubService {
   public username : string;
   public name : string;
   public searchRepos : Repository [] = []
+  public data :any 
 
 
 
@@ -36,7 +37,7 @@ export class GithubService {
     public_repos: number,
     projects: number,
     avatar_url : string,
-    repos_url :string, 
+    html_url :string, 
   }
     let promise = new Promise((resolve, reject) => {
     this.http
@@ -50,9 +51,8 @@ export class GithubService {
           this.user.public_repos= response.public_repos;
           this.user.projects = response.projects;
           this.user.avatar_url = response.avatar_url;
-          this.user.repos_url = response.repos_url
+          this.user.html_url = response.html_url
           console.log(this.user);
-          console.log (`https://api.github.com/users/${this.username}/repos?access_token=`+environment.apiKey)
 
           resolve();
         },
@@ -64,7 +64,7 @@ export class GithubService {
           this.user.public_repos= 0 ;
           this.user.projects = 0;
           this.user.avatar_url = "Unavailable";
-          this.user.repos_url = "Unavailable";
+          this.user.html_url = "Unavailable";
           reject(error);
         });
   });
@@ -73,23 +73,25 @@ export class GithubService {
 
 
    githubRepo(){
+     
     interface repoResponse {
       name: string,
       description: string,  
     }
     let promise = new Promise((resolve, reject) => {
     this.http
-      .get <repoResponse>(`https://api.github.com/users/${this.username}/repos?access_token=`+environment.apiKey)
+      .get <repoResponse>(`https://api.github.com/users/repos?`)
       .toPromise()
       .then(response => {
-      
-        for (let i = 0; i < 10; i++) {
-          console.log(response[i])
-          this.searchRepo = new Repository (response[i].name, response[i].description)
-          this.searchRepos.push(this.searchRepo)     
-        }
-        console.log(response)
-        console.log(this.searchRepos)
+        this.data = response
+      console.log (this.data)
+        //for (let i = 0; i < 10; i++) {
+          //console.log(response[i])
+          //this.searchRepo = new Repository (response[i].name, response[i].description)
+          //this.searchRepos.push(this.searchRepo)     
+          //console.log(this.searchRepos)
+        //}
+       
       
           resolve();
         },

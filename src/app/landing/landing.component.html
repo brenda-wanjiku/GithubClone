@@ -1,12 +1,10 @@
 <h1><span class="badge badge-primary">Github Searcher</span> </h1>
 <form   #searchForm='ngForm' >
         <label for="username"></label>
-        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>  
-        <label for="repositories"></label>
-        <input class="form-control form-control-lg" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>  
+        <input class="form-control form-control-lg col-md-8" type="text" placeholder="Username" type="text" id='username' name='username' [(ngModel)]='username'>    
 </form>
-
-<button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getUser()>Search</button>
+<button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getRepo()>Repository</button>
+<button type="submit" class="btn btn-outline-secondary btn-lg" (click)= getUser()>Username</button>
 
 
 
@@ -21,7 +19,8 @@
             <h4>followers:  {{user.followers}}</h4> 
                 <h4>following:  {{user.following}}</h4> 
                     <h4>public repos:  {{user.public_repos}}</h4> 
-                  <button> <a href="{{user.repos_url}}"> Go to Github</a></button> 
+                  <button> <a href="{{user.html_url}}"> Go to Github</a></button> 
+                  <p *ngFor = 'let searchRepo of searchRepos'> {{searchRepo.name}}</p>
         </div>
     </div>
 </div>
@@ -40,13 +39,15 @@
       <h3 class="card-text"> followers: {{profile.followers}}  </h3>
       <h3 class="card-text">following: {{profile.following}} </h3>
       <h3 class="card-text">public Repositories:{{profile.public_repos}}</h3>
-     
+      <button> <a href="{{profile.html_url}}"> Go to Github</a></button> 
     </div>
   </div>
 </div>
 </div>
 
-<div> 
-    <h2> Repositories</h2>
-    <p *ngFor ='let repo of repos'>Following: {{profile.following}}</p>
+<div class="card-body">
+<h2 class="card-title"> Repositories</h2>
+<div *ngFor ='let repo of repos'>
+    <p>  {{repo.name}} {{repo.description}}</p>
+</div>
 </div>

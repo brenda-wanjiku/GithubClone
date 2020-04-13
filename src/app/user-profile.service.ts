@@ -5,6 +5,7 @@ import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { rejects } from 'assert';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +28,7 @@ public repos : Repository [] = []
       public_repos: number,
       projects: number,
       avatar_url : string,
-      repos_url :string,
+      html_url :string,
      
     }
   
@@ -43,7 +44,7 @@ public repos : Repository [] = []
             this.profile.public_repos= response.public_repos;
             this.profile.projects = response.projects;
             this.profile.avatar_url = response.avatar_url;
-            this.profile.repos_url = response.repos_url
+            this.profile.html_url = response.html_url
   
             resolve();
           },
@@ -55,7 +56,7 @@ public repos : Repository [] = []
             this.profile.public_repos= 0 ;
             this.profile.projects = 0;
             this.profile.avatar_url = "Unavailable";
-            this.profile.repos_url = "Unavailable";
+            this.profile.html_url = "Unavailable";
             reject(error);
           });
     });
@@ -66,7 +67,8 @@ public repos : Repository [] = []
      userRepo(){
       interface repoResponse {
         names: string,
-        description: string,  
+        description: string, 
+        url: string 
       }
      const promise = new Promise((resolve, reject) => {
       this.http
