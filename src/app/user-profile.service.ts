@@ -15,7 +15,7 @@ public repo : Repository
 public repos : Repository [] = []
 
   constructor(private http: HttpClient) {
-    this.profile = new User ('','', 0, 0,0,0,'','')
+    this.profile = new User (new Date(),'','', 0, 0,0,0,'','')
     this.repo = new Repository('','')
    }
 

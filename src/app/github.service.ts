@@ -18,10 +18,9 @@ export class GithubService {
 
 
   constructor(private http : HttpClient) {
-    this.user = new User ('','', 0, 0,0,0,'','')
+    this.user = new User (new Date(),'','', 0, 0,0,0,'','')
     this.searchRepo = new Repository('','')
    }
-
 
 
    getUsername (username : string ) {
@@ -30,6 +29,7 @@ export class GithubService {
    }
    getProfileInfo () {
     interface userResponse {
+    date : Date,
     login: string,
     bio: string,
     followers: number,
@@ -41,9 +41,10 @@ export class GithubService {
   }
     let promise = new Promise((resolve, reject) => {
     this.http
-      .get <userResponse>(`https://api.github.com/users/${this.username}?access_token=`+environment.apiKey)
+      .get <userResponse>(`https://api.github.com/search/users/${this.username}?access_token=`+environment.apiKey)
       .toPromise()
       .then(response => {
+          this.user.date = response.date;
           this.user.login= response.login;
           this.user.bio = response.bio;
           this.user.followers = response.followers;
@@ -80,11 +81,10 @@ export class GithubService {
     }
     let promise = new Promise((resolve, reject) => {
     this.http
-      .get <repoResponse>(`https://api.github.com/users/repos?`)
+      .get<repoResponse>(`https://api.github.com/search/repositories?q={query}`)
       .toPromise()
       .then(response => {
-        this.data = response
-      console.log (this.data)
+        this.searchRepo = new Repository (response.name, response.description)
         //for (let i = 0; i < 10; i++) {
           //console.log(response[i])
           //this.searchRepo = new Repository (response[i].name, response[i].description)

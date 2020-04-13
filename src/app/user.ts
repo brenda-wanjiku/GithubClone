@@ -1,5 +1,6 @@
 export class User {
 constructor(
+ public date : Date,
  public login: string,
  public bio: string,
  public followers: number,
