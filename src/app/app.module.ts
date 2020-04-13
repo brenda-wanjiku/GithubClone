@@ -9,7 +9,7 @@ import { LandingComponent } from './landing/landing.component';
 import { from } from 'rxjs';
 import { DatePipe } from './date.pipe';
 import { GithubDirective } from './github.directive';
-
+import {RoutingModule} from './routing/routing.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import { GithubDirective } from './github.directive';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RoutingModule
   ],
   providers: [GithubService],
   bootstrap: [AppComponent]
