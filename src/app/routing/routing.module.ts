@@ -5,6 +5,7 @@ import { LandingComponent } from '../landing/landing.component'
 
 const routes: Routes= [
   {path:"landing",component:LandingComponent},
+  { path: '', redirectTo:"/landing", pathMatch:"full"},
 ]
 
 @NgModule({

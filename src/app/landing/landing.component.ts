@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { GithubService } from '../github.service'
-import { User } from '../user';
+import { User, repoUser } from '../user';
 import { Repository } from '../repository';
 import { UserProfileService } from '../user-profile.service'
 import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -15,7 +16,8 @@ import { HttpClient } from '@angular/common/http';
 
 export class LandingComponent implements OnInit {
 @Input() 
-user: User;
+user: repoUser;
+users: repoUser[] = []
 profile : User
 repo: Repository
 repos : Repository[] = []
@@ -30,8 +32,6 @@ public repoName: string;
     this.profile = this.userProfileService.profile
     this.userProfileService.userRepo()
     this.repos = this.userProfileService.repos
-    this.githubService.githubRepo()
-    this.searchRepos = this.githubService.searchRepos
   }
 
   ngOnInit() {
@@ -40,14 +40,15 @@ public repoName: string;
   getRepo(){
     this.githubService.getrepoName(this.repoName)
     this.githubService.githubRepo()
-    this.searchRepo = this.githubService.searchRepo
+    this.searchRepos = this.githubService.searchRepos
   }
+
 
   getUser(){
     this.githubService.getUsername(this.username);
     this.githubService.getProfileInfo();
-    this.user = this.githubService.user;
-    console.log(this.user);
+    this.users = this.githubService.users;
+    console.log(this.users);
  
   }
 

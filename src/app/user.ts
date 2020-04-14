@@ -1,6 +1,7 @@
 export class User {
+    
 constructor(
- public date : Date,
+public date: Date,
  public login: string,
  public bio: string,
  public followers: number,
@@ -10,7 +11,15 @@ constructor(
  public avatar_url : string,
  public html_url :string
 
-
 ){}
 
 }
+
+
+export class repoUser {
+constructor (
+    public login : string,
+    public avatar_url : string,
+    public html_url: string
+)
+{}}

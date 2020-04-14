@@ -21,6 +21,7 @@ public repos : Repository [] = []
 
    userProfile(){
       interface profileResponse {
+      date : Date,
       login: string,
       bio: string,
       followers: number,
@@ -37,6 +38,7 @@ public repos : Repository [] = []
         .get <profileResponse> (`https://api.github.com/users/brenda-wanjiku?access_token=`+environment.apiKey)
         .toPromise()
         .then(response => {
+            this.profile.date = new Date();
             this.profile.login= response.login;
             this.profile.bio = response.bio;
             this.profile.followers = response.followers;

@@ -16,29 +16,24 @@
     </div>
 </div>
 
-<div *ngIf = 'user'>
+<div *ngFor = 'let user of users'>
     <div class="row Users">
         <div class= "col-md-3">
             <img src="{{user.avatar_url}}" class="img-circle" img="responsive" alt="profileImg">
         </div>
         <div class ="col-md-6">
-
             <h4> name:  {{user.login}}</h4> 
-             <h4>{{user.date}}</h4>
-            <h4>followers:{{user.followers}}</h4> 
-            <h4>following:{{user.following}}</h4> 
-            <h4>public repos:{{user.public_repos}}</h4> 
             <button type="button" class="btn btn-outline-dark  btn-lg btn-block"> <a href="{{user.html_url}}"> Go to Github</a></button>
          </div>
     </div>
 </div>
                   
-<div *ngIf='searchRepo'>
+<div>
     <div class="row Repos">
         <div class ="col-md-6">
             <div *ngFor = 'let searchRepo of searchRepos'> 
-                <h4>{{searchRepo.name}</h4>
-                <h4> name:  {{searchRepo.description}}</h4> 
+                <h4> name: {{searchRepo.name}}</h4>
+                <h4> description: {{searchRepo.description}}</h4> 
             </div>
         </div>
     </div>
@@ -56,7 +51,7 @@
             <h3 class="card-text"> followers: {{profile.followers}}  </h3>
             <h3 class="card-text">following: {{profile.following}} </h3>
             <h3 class="card-text">Repositories:  {{profile.public_repos}}</h3>
-            <h3> Created {{profile.date|date}} days ago</h3> 
+            <h3> Created {{profile.date| date}} days ago</h3> 
             <button type="button" class="btn btn-info btn-lg btn-block Github"><a href="{{profile.html_url}}"> Go to Github</a></button> 
         </div>
     </div>
