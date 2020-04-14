@@ -16,12 +16,14 @@ h3{
     font-family: 'Pangolin', cursive;
     text-align: center;
     margin-top: 50px;
+    margin-left: 90px;
 }
 
 h4{
     font-family: 'Pangolin', cursive;
     font-size: 40px;
-    margin-left: 50px;
+    margin-left: 100px;
+    margin-top: 40px;
     text-align: center;
     
 }
@@ -32,7 +34,7 @@ h4{
 .search{
    width: 250px;
    text-align: center;
-   margin-left: 100px;
+   margin-left: 200px;
    margin-bottom: 100px;
    margin-top: 30px;
 
@@ -41,18 +43,19 @@ h4{
  width: 250px;
  text-align: center;
  margin-left: 250px;
+ margin-top: 50px;
 
 }
 #username{
 text-align: center;
 margin-top: 30px;
-margin-left: 100px;
+margin-left: 150px;
 width: 1000px;
 }
 #repoName{
 text-align: center;
 margin-top: 30px;
-margin-left: 100px;
+margin-left: 150px;
 width: 1000px;
 }
 .container {
@@ -74,4 +77,7 @@ h6{
     font-family: 'IM Fell English', serif;
     font-size: 40px;
     line-height: 100px;
+
 }
+
+

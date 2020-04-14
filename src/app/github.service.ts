@@ -43,6 +43,7 @@ export class GithubService {
         this.data = response
         console.log(this.data.items)
         for(let i = 0; i<20;i++){
+          console.log(this.user.login)
           this.user.login = this.data.items[i].login;
           this.user.avatar_url = this.data.items[i].avatar_url;
           this.user.html_url = this.data.items[i].html_url;
