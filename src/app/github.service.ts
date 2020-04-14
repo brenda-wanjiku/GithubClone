@@ -14,7 +14,9 @@ export class GithubService {
   public name : string;
   public searchRepos : Repository [] = []
   public data :any 
-
+  public repoName : string
+  usersapiUrl = "https://api.github.com/search/users?q=";
+  apiUrl = "https://api.github.com/search/repositories?q=";
 
 
   constructor(private http : HttpClient) {
@@ -27,6 +29,8 @@ export class GithubService {
      console.log ("service is ready")
      this.username = username;
    }
+
+
    getProfileInfo () {
     interface userResponse {
     date : Date,
@@ -41,7 +45,7 @@ export class GithubService {
   }
     let promise = new Promise((resolve, reject) => {
     this.http
-      .get <userResponse>(`https://api.github.com/search/users/${this.username}?access_token=`+environment.apiKey)
+      .get <userResponse>(`https://api.github.com/users/${this.username}?access_token=`+environment.apiKey)
       .toPromise()
       .then(response => {
           this.user.date = response.date;
@@ -73,28 +77,29 @@ export class GithubService {
    }
 
 
+   getrepoName(repoName:string){
+    this.repoName = repoName
+   }
+
+
    githubRepo(){
-     
     interface repoResponse {
       name: string,
-      description: string,  
+      description: string,
     }
-    let promise = new Promise((resolve, reject) => {
-    this.http
-      .get<repoResponse>(`https://api.github.com/search/repositories?q={query}`)
-      .toPromise()
-      .then(response => {
-        this.searchRepo = new Repository (response.name, response.description)
-        //for (let i = 0; i < 10; i++) {
-          //console.log(response[i])
-          //this.searchRepo = new Repository (response[i].name, response[i].description)
-          //this.searchRepos.push(this.searchRepo)     
-          //console.log(this.searchRepos)
-        //}
-       
-      
+    this.searchRepos.length = 0;
+    let promise = new Promise((resolve,reject)=>{
+      let repoRequesturl = this.apiUrl + this.repoName
+      this.http.get<repoResponse>(repoRequesturl).toPromise().then(response=>{
+        console.log(response)
+       for(let i = 0; i<20;i++){
+        this.searchRepo = new Repository(response[i].name, response[i].description)
+        this.searchRepos.push(this.searchRepo)
+       }
+
           resolve();
         },
+
         error => {
           this.searchRepo.name= "Unavailable";
           this.searchRepo.description = "Unavailable";
@@ -103,7 +108,7 @@ export class GithubService {
   });
   return promise;
    }
-
+     
 
 
 }

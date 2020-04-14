@@ -9,6 +9,7 @@ h2{
     text-align: center;
     font-size: 80px;
     font-family: 'Pangolin', cursive;
+    margin-top: 40px;
 }
 h3{
     font-size: 60px;
@@ -19,12 +20,13 @@ h3{
 
 h4{
     font-family: 'Pangolin', cursive;
-    font-size: 50px;
+    font-size: 40px;
+    margin-left: 30px;
     text-align: center;
     
 }
 .img-circle {
-    margin-left: 30px;
+    margin-left: 10px;
     margin-top: 50px;
 }
 .search{
@@ -35,15 +37,27 @@ h4{
    margin-top: 30px;
 
 }
+.Users button{
+ width: 250px;
+ text-align: center;
+ margin-left: 250px;
+
+}
 #username{
-    text-align: center;
-    margin-top: 30px;
-  margin-left: 100px;
-  width: 1000px;
+text-align: center;
+margin-top: 30px;
+margin-left: 100px;
+width: 1000px;
+}
+#repoName{
+text-align: center;
+margin-top: 30px;
+margin-left: 100px;
+width: 1000px;
 }
 .container {
     text-align: center;
-    margin-right: 30px;
+   
 }
 .Github{
     margin-top: 30px;
@@ -59,4 +73,5 @@ h4{
 h6{
     font-family: 'IM Fell English', serif;
     font-size: 40px;
+    line-height: 100px;
 }

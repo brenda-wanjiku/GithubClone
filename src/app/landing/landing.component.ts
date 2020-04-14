@@ -5,12 +5,14 @@ import { Repository } from '../repository';
 import { UserProfileService } from '../user-profile.service'
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css'],
   providers: [GithubService]
 })
+
 export class LandingComponent implements OnInit {
 @Input() 
 user: User;
@@ -20,6 +22,7 @@ repos : Repository[] = []
 searchRepo : Repository
 searchRepos : Repository[] = []
 public username: string;
+public repoName: string;
 
 
   constructor( private http: HttpClient, private githubService: GithubService, private userProfileService : UserProfileService) { 
@@ -35,7 +38,9 @@ public username: string;
   }
 
   getRepo(){
+    this.githubService.getrepoName(this.repoName)
     this.githubService.githubRepo()
+    this.searchRepo = this.githubService.searchRepo
   }
 
   getUser(){

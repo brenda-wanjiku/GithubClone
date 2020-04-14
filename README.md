@@ -4,7 +4,8 @@
 Brenda Wanjiku
 
 ### Description
-This is a webpage that allows you to search users and repositories on Github
+This app is based of the Github app where you are able to search for Users and Repositories.
+
 
 ### Tech Used
 1. HTML for setting up the webpage

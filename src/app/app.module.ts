@@ -6,10 +6,13 @@ import { GithubService }  from './github.service'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { from } from 'rxjs';
 import { DatePipe } from './date.pipe';
 import { GithubDirective } from './github.directive';
-import {RoutingModule} from './routing/routing.module';
+
+
+import {RoutingModule} from '../app/routing/routing.module';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import {RoutingModule} from './routing/routing.module';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    RoutingModule
+    RoutingModule,
+    
   ],
   providers: [GithubService],
   bootstrap: [AppComponent]
